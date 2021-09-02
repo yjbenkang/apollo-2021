@@ -33,17 +33,17 @@ const Column = styled.div`
 `;
 
 const Title = styled.h1`
-  font-size: 65px;
+  font-size: 45px;
   margin-bottom: 15px;
 `;
 
 const Subtitle = styled.h4`
-  font-size: 35px;
+  font-size: 25px;
   margin-bottom: 10px;
 `;
 
 const Description = styled.p`
-  font-size: 28px;
+  font-size: 20px;
 `;
 
 const Poster = styled.div`
@@ -66,21 +66,23 @@ export default () => {
     </Container>
   );
   }
-  if(data && data.movie){
-      console.log(data.movie);
-      return (
-        <Container>
-          <Column>
-            <Title>{data.movie.title}</Title>
-            <Subtitle>{data.movie.language}/⭐️{data.movie.rating}/</Subtitle>
+  return (
+    <Container>
+      <Column>
+        <Title>{loading ? `Loading...` : data.movie.title}</Title>
+        {!loading && data.movie && (
+          <>
+            <Subtitle>
+              {data.movie.language} · {data.movie.rating}
+            </Subtitle>
             <Description>{data.movie.description_intro}</Description>
-          </Column>
-          <Poster
-            bg={data && data.movie ? data.movie.medium_cover_image : ""}
-          ></Poster>
-          <Poster></Poster>
-        </Container>
-      );
-  }
+          </>
+        )}
+      </Column>
+      <Poster
+        bg={data && data.movie ? data.movie.medium_cover_image : ""}
+      ></Poster>
+    </Container>
+  );
   
 };
