@@ -6,7 +6,7 @@ import Movie from "../components/Movie";
 
 const GET_MOVIES = gql`
   {
-    movies {
+    movies(limit: 50 rating:8) {
       id
       title
       medium_cover_image
@@ -19,10 +19,10 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: linear-gradient(to right, #d754ab, #fd723a);
   width: 100%;
 `;
 const Header = styled.header`
-  background-image: linear-gradient(-45deg, #d754ab, #fd723a);
   height: 45vh;
   color: white;
   display: flex;
@@ -61,16 +61,14 @@ export default () => {
     <Container>
       <Header>
         <Title>Apollo 2020</Title>
-        <Subtitle>I love GraphQL</Subtitle>
+        <Subtitle>I love GraphQL💝</Subtitle>
       </Header>
       {loading && <Loading>Loading...</Loading>}
-      {!loading && data.movies && (
-        <Movies>
-          {data.movies.map(m => (
-            <Movie key={m.id} id={m.id} bg={m.medium_cover_image} />
-          ))}
-        </Movies>
-      )}
+      <Movies>
+        {data?.movies?.map(m => (
+          <Movie key={m.id} id={m.id} bg={m.medium_cover_image} />
+        ))}
+      </Movies>
     </Container>
   );
 };
